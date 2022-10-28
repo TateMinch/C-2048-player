@@ -1,0 +1,24 @@
+Max Brandwine and Tate Minch
+2048 Algorithm Writeup
+
+For our 2048 player, we took the objective function with lookahead root.
+When our makemove function is called, the first step taken is the bestMove
+variable is initialized to "NONE", and the best score is initialized using the 
+numeric_limits lowest function for a double. Then each possible move is looped
+through, and a temporary variable is initialized with the calculateScore function.
+This function creates a copy of the board to compare with, and as long as the 
+move it is checking is valid, it then sends the new board and move to the generate 
+score function. From there, a new variable called totalScore is intialized to 0,
+every slot on the new board is visited, and if the value at that spot is 0,
+it is set equal to 2 and the move score is evaluated and multiplied by 0.9
+and added to the totalScore value. This process is then repeated with the cell
+being set equal to 4 and then the new evaluated moveScore is again added to
+totalScore.
+
+At the end of this loop, the totalScore variable is returned to the calculateScore
+function, which then returns that value to the original makeMove function. This
+returned value is then compared with bestScore, which was originally intialized
+to 0, and if it is greater, bestScore is replaces with the temporary variable
+score, and bestMove is set equal to the move whos higher score was just returned
+on the occasion of its loop. After all possible moves are looped through and 
+checked, the move with the highest possible score is returned and made.
